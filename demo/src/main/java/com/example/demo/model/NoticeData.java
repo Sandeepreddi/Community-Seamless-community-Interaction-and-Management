@@ -17,7 +17,7 @@ public class NoticeData {
     private Binary image;
 
 
-    // ✅ Parameterized Constructor (With All Fields)
+    // Parameterized Constructor (With All Fields)
     public NoticeData(String name, String date, String time, String description, Binary image) {
         this.name = name;
         this.date = date;
@@ -26,7 +26,7 @@ public class NoticeData {
         this.image = image;
     }
 
-    // ✅ Getters and Setters
+    // Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 

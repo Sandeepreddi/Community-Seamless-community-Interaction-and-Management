@@ -7,7 +7,7 @@ const Body = () => {
   const [assignCard, setAssignCard] = useState(null);
   const [flatNo, setFlatNo] = useState("");
   const [block, setBlock] = useState("");
-  const [view, setView] = useState("all"); // all | available | occupied
+  const [view, setView] = useState("all");
 
   useEffect(() => {
     fetch("http://localhost:8080/static/get")

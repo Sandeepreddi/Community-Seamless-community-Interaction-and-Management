@@ -15,13 +15,13 @@ public class Complaints {
     private LocalDate date; // Stores the current date
     private LocalTime time; // Stores the current time
 
-    // ✅ No-Args Constructor (Auto-sets Date & Time)
+    // No-Args Constructor (Auto-sets Date & Time)
     public Complaints() {
         this.date = LocalDate.now(); // Automatically captures the current date
         this.time = LocalTime.now(); // Automatically captures the current time
     }
 
-    // ✅ Parameterized Constructor (Title & Description only)
+    // Parameterized Constructor (Title & Description only)
     public Complaints(String title, String description) {
         this.title = title;
         this.description = description;
@@ -29,7 +29,7 @@ public class Complaints {
         this.time = LocalTime.now(); // Automatically sets the current time
     }
 
-    // ✅ Getters and Setters
+    // Getters and Setters
     public String getId() {
         return id;
     }

@@ -17,14 +17,14 @@ public class StaticController {
     @Autowired
     private StaticRepository staticRepository;
 
-    // ✅ Create static data
+    // Create static data
     @PostMapping("/create")
     public ResponseEntity<String> createStaticData(@RequestBody StaticData staticData) {
         staticRepository.save(staticData);
         return ResponseEntity.ok("Static data created successfully");
     }
 
-    // ✅ Fetch the first available static data (assuming there’s only one)
+    // Fetch the first available static data (assuming there’s only one)
     @GetMapping("/get")
 public ResponseEntity<StaticData> getStaticData() {
     Optional<StaticData> staticData = staticRepository.findAll().stream().findFirst();
@@ -33,7 +33,7 @@ public ResponseEntity<StaticData> getStaticData() {
                      .orElseGet(() -> ResponseEntity.notFound().build());
 }
 
-    // ✅ Fetch by ID
+    // Fetch by ID
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getStaticDataById(@PathVariable String id) {
         Optional<StaticData> staticData = staticRepository.findById(id);

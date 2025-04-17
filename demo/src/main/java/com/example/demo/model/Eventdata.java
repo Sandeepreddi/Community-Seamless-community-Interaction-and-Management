@@ -68,12 +68,12 @@ public class Eventdata {
         this.feedbacks.add(feedback);
     }
 
-    // ✅ Inner Class for Feedback
+    // Inner Class for Feedback
     public static class Feedback {
         private String user;
         private String comment;
 
-        // ✅ Constructors
+        // Constructors
         public Feedback() {}
 
         public Feedback(String user, String comment) {
@@ -81,7 +81,7 @@ public class Eventdata {
             this.comment = comment;
         }
 
-        // ✅ Getters and Setters
+        // Getters and Setters
         public String getUser() { return user; }
         public void setUser(String user) { this.user = user; }
 

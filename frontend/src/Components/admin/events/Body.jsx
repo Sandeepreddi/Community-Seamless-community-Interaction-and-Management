@@ -37,7 +37,7 @@ function Body() {
 
       setFormData({
         ...formData,
-        image: file  // ✅ Corrected field name
+        image: file  
       });
 
       const reader = new FileReader();
@@ -56,7 +56,7 @@ function Body() {
       formDataToSend.append("name", formData.name);
       formDataToSend.append("date", formData.date);
       formDataToSend.append("description", formData.description);
-      formDataToSend.append("image", formData.image);  // ✅ Corrected field name
+      formDataToSend.append("image", formData.image);  
 
       const response = await fetch("http://localhost:8080/api/events/upload", {
         method: "POST",
@@ -108,7 +108,7 @@ function Body() {
                 <label>Event Name:</label>
                 <input
                   type="text"
-                  name="name"  // ✅ Corrected field name
+                  name="name" 
                   value={formData.name}
                   onChange={handleInputChange}
                   required
@@ -120,7 +120,7 @@ function Body() {
                 <label>Event Date:</label>
                 <input
                   type="date"
-                  name="date"  // ✅ Corrected field name
+                  name="date"  
                   value={formData.date}
                   onChange={handleInputChange}
                   required
@@ -131,7 +131,7 @@ function Body() {
               <div className="form-group">
                 <label>Event Description:</label>
                 <textarea
-                  name="description"  // ✅ Corrected field name
+                  name="description"  
                   value={formData.description}
                   onChange={handleInputChange}
                   required

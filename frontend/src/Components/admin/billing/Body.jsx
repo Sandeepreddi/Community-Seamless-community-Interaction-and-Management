@@ -1,74 +1,125 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './AdminBilling.css'
 
 function Body() {
-  return (
-    <div className="billings-section" style={styles.container}>
-      
-      {/* Add content here */}
+  const [residents, setResidents] = useState([]);
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [view, setView] = useState("PAID"); // or "PENDING"
 
-      <h2 style={styles.heading}>Payment Status of the Residents</h2>
-      <table style={styles.table}>
-        <thead>
-          <tr style={styles.headerRow}>
-            <th style={styles.headerCell}>No</th>
-            <th style={styles.headerCell}>Flat No</th>
-            <th style={styles.headerCell}>Amount</th>
-            <th style={styles.headerCell}>Payment ID</th>
-            <th style={styles.headerCell}>Payment Date</th>
-            <th style={styles.headerCell}>Status</th>
+  useEffect(() => {
+    const today = new Date();
+    // const isFirstDayOfMonth = today.getDate() === 1;
+    const isFirstDayOfMonth = false;
+
+    fetch('http://localhost:8080/residents')
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to fetch residents');
+        return response.json();
+      })
+      .then(data => {
+        setResidents(data);
+        setLoading(false);
+
+        if (isFirstDayOfMonth) {
+          
+          data.forEach(resident => {
+            const paymentData = {
+              name: resident.name,
+              email:resident.email,
+              phoneNumber: resident.phone_number,
+              status: "PENDING",
+              amount: 10000,
+              transactionId: "",
+              paymentMode: "",
+              dateOfPayment: ""
+            };
+            console.log("PaymentData",paymentData);
+
+            fetch('http://localhost:8080/payments/create-pending-payment', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(paymentData),
+            })
+              .then(res => {
+                if (!res.ok) throw new Error('Failed to post payment');
+                return res.json();
+              })
+              .then(response => {
+                console.log('Payment posted for:', resident.name);
+              })
+              .catch(error => {
+                console.error('Error posting payment:', error.message);
+              });
+          });
+        }
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
+
+    // Fetch all payments
+    fetch('http://localhost:8080/payments')
+      .then(res => res.json())
+      .then(data => {
+        setPayments(data);
+      })
+      .catch(err => console.error("Payment fetch error", err));
+  }, []);
+
+  const filteredPayments = payments.filter(p => p.status === view);
+
+  return (
+    <div className="billings-section">
+  <h2 className="billing-heading">Payment Status of the Residents</h2>
+
+  <div className="view-buttons">
+    <button onClick={() => setView("PAID")}>Paid</button>
+    <button onClick={() => setView("PENDING")}>Unpaid</button>
+  </div>
+
+  <table className="billing-table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Mobile No</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {filteredPayments.length === 0 ? (
+        <tr><td colSpan={6}>No {view.toLowerCase()} payments available</td></tr>
+      ) : (
+        filteredPayments.map((payment, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{payment.name}</td>
+            <td>{payment.phoneNumber}</td>
+            <td>₹{payment.amount}</td>
+            <td>
+              {payment.dateOfPayment
+                ? new Date(payment.dateOfPayment).toLocaleDateString()
+                : "-"}
+            </td>
+            <td className={payment.status === "PAID" ? "billing-status-paid" : "billing-status-pending"}>
+              {payment.status}
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <tr style={styles.row}>
-            <td style={styles.cell}>1</td>
-            <td style={styles.cell}>A234</td>
-            <td style={styles.cell}>3500</td>
-            <td style={styles.cell}>1</td>
-            <td style={styles.cell}>-</td>
-            <td style={{ ...styles.cell, ...styles.pending }}>PENDING</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
+        ))
+      )}
+    </tbody>
+  </table>
+</div>
+
   );
 }
 
 
-const styles = {
-  container: {
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif',
-  },
-  heading: {
-    textAlign: 'center',
-    color: '#333',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse',
-    marginTop: '20px',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-  },
-  headerRow: {
-    backgroundColor: '#007bff',
-    color: 'white',
-  },
-  headerCell: {
-    padding: '10px',
-    border: '1px solid #ddd',
-    textAlign: 'left',
-  },
-  row: {
-    backgroundColor: '#f9f9f9',
-  },
-  cell: {
-    padding: '10px',
-    border: '1px solid #ddd',
-  },
-  pending: {
-    color: 'red',
-    fontWeight: 'bold',
-  },
-};
 export default Body;

@@ -18,7 +18,7 @@ public class ComplaintsController {
     @Autowired
     private ComplaintsRepository complaintsRepository;
 
-    // ✅ Create a New Complaint (Auto Date & Time)
+    //Create a New Complaint (Auto Date & Time)
     @PostMapping("/add")
     public ResponseEntity<String> addComplaint(@RequestBody Complaints complaint) {
         Complaints newComplaint = new Complaints(complaint.getTitle(), complaint.getDescription());
@@ -26,14 +26,14 @@ public class ComplaintsController {
         return ResponseEntity.ok("Complaint added successfully with ID: " + newComplaint.getId());
     }
 
-    // ✅ Get All Complaints
+    // Get All Complaints
     @GetMapping
     public ResponseEntity<List<Complaints>> getAllComplaints() {
         List<Complaints> complaints = complaintsRepository.findAll();
         return ResponseEntity.ok(complaints);
     }
 
-    // ✅ Delete Complaint by ID
+    // Delete Complaint by ID
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteComplaint(@PathVariable String id) {
         Optional<Complaints> complaintOpt = complaintsRepository.findById(id);
