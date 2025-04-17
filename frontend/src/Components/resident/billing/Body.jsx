@@ -1,8 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import './ResidentBilling.css'
 
 const Body = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentDetails, setPaymentDetails] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const email = localStorage.getItem("email");
+
+
+  // Fetch user payment details on load
+  useEffect(() => {
+    const fetchPaymentDetails = async () => {
+      try {
+        const res = await fetch(`http://localhost:8080/payments/get-by-email/${email}`);
+        const data = await res.json();
+        console.log("payment data",data);
+        setPaymentDetails(data);
+      } catch (error) {
+        console.error("Error fetching payment details:", error);
+      }
+    };
+
+    fetchPaymentDetails();
+  }, []);
 
   const handlePayNow = () => {
     setShowPaymentModal(true);
@@ -11,80 +32,78 @@ const Body = () => {
   const handlePayment = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8080/api/payments/create-order", {
+      const res = await fetch("http://localhost:8080/payments/create-order", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: 3500,
+          amount: paymentDetails.amount * 100, // Razorpay takes amount in paise
           currency: "INR",
           receipt: "receipt_" + Date.now(),
         }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to create order");
-      }
-
       const order = await res.json();
 
-      // Check if Razorpay is loaded
       if (!window.Razorpay) {
-        alert("Razorpay SDK not loaded. Please refresh the page.");
+        alert("Razorpay SDK not loaded. Please refresh.");
         return;
       }
 
       const options = {
-        key: "rzp_test_ha9K2euNE9OImQ", // Replace with your Razorpay key
+        key: "rzp_test_ha9K2euNE9OImQ",
         amount: order.amount,
         currency: order.currency,
         name: "CommUnity",
-        description: "Monthly Maintenance Payment",
+        description: "Maintenance Payment",
         order_id: order.id,
         handler: async function (response) {
           alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-          await savePaymentDetails(order.amount, response);
+          await updatePayment(response.razorpay_payment_id);
         },
-        theme: {
-          color: "#3399cc",
-        },
+        
+        theme: { color: "#3399cc" },
       };
 
       const razor = new window.Razorpay(options);
       razor.open();
-    } catch (error) {
-      console.error("Error during payment:", error);
-      alert("Payment failed. Please try again.");
+    } catch (err) {
+      console.error("Payment error:", err);
+      alert("Payment failed.");
     } finally {
       setLoading(false);
       setShowPaymentModal(false);
     }
   };
 
-  const savePaymentDetails = async (amount, response) => {
+  const updatePayment = async (transactionId) => {
     try {
-      const res = await fetch("http://localhost:8080/api/payments/save-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      console.log('email at update', email);
+      const res = await fetch(`http://localhost:8080/payments/update-payment-by-email/${email}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: "Pavani",
-          phoneNumber: "9876543210",
-          amount: amount / 100, // Razorpay amount is in paise
-          transactionId: response.razorpay_payment_id,
+          transactionId: transactionId,
           paymentMode: "Razorpay",
+          dateOfPayment: new Date().toISOString(),
+          status: "PAID",
         }),
       });
-
-      if (!res.ok) {
-        console.error("Failed to save payment");
+  
+      if (res.ok) {
+        const updated = await res.json();
+        alert("Payment details updated successfully.");
+        setPaymentDetails(updated);
+      } else {
+        const errorData = await res.json();
+        console.error("Failed to update payment details:", errorData);
       }
     } catch (error) {
-      console.error("Error saving payment details:", error);
+      console.error("Error updating payment:", error);
     }
   };
+  
+
+  
 
   return (
     <div className="billing-container">
@@ -92,16 +111,21 @@ const Body = () => {
         <header className="header">
           <h1>Billings</h1>
           <div className="user-info">
-            <span>Pavani</span>
+            <span>{paymentDetails?.name || "Loading..."}</span>
             <div className="avatar"></div>
           </div>
         </header>
 
         <div className="billing-content">
           <div className="bill-card">
-            <h2>Monthly Maintenance Bill: 3500/-</h2>
-            <button className="pay-now-btn" onClick={handlePayNow}>
-              Pay Now
+            <h2>Maintenance Bill: ₹{paymentDetails?.amount}</h2>
+            <p>Status: <strong>{paymentDetails?.status}</strong></p>
+            <button
+              className="pay-now-btn"
+              onClick={handlePayNow}
+              disabled={paymentDetails?.status === "PAID"}
+            >
+              {paymentDetails?.status === "PAID" ? "Paid" : "Pay Now"}
             </button>
           </div>
         </div>
@@ -110,14 +134,11 @@ const Body = () => {
       {showPaymentModal && (
         <div className="payment-modal">
           <div className="payment-content">
-            <h2>Payment Request from CommUnity</h2>
+            <h2>Confirm Your Payment</h2>
             <div className="payment-details">
-              <p>PAYMENT FOR</p>
-              <p>Maintenance bill for flat A234</p>
-              <p>RECEIPT</p>
-              <p>REF{Date.now()}</p>
-              <p>AMOUNT PAYABLE</p>
-              <p className="amount">INR 3,500.00</p>
+              <p>Flat: A234</p>
+              <p>Receipt: REF{Date.now()}</p>
+              <p>Amount: ₹{paymentDetails?.amount}</p>
             </div>
             <button className="continue-btn" onClick={handlePayment}>
               {loading ? "Processing..." : "Continue"}

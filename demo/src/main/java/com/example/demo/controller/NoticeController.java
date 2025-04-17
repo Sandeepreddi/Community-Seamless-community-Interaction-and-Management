@@ -23,7 +23,7 @@ public class NoticeController {
     @Autowired
     private NoticeRepository noticeRepository;
 
-    // ✅ Create Notice (POST)
+    // Create Notice (POST)
     @PostMapping("/upload")
     public ResponseEntity<String> addNotice(
             @RequestParam("name") String name,
@@ -35,12 +35,12 @@ public class NoticeController {
         try {
             Binary imageBinary = null;
             if (file != null && !file.isEmpty()) {
-                // ✅ Validate Image Size (Example: Limit to 5MB)
+                // Validate Image Size (Example: Limit to 5MB)
                 if (file.getSize() > 5 * 1024 * 1024) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image size exceeds 5MB");
                 }
 
-                // ✅ Validate Image Type
+                // Validate Image Type
                 String contentType = file.getContentType();
                 if (contentType == null || !contentType.startsWith("image/")) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Only image files are allowed");
@@ -49,7 +49,7 @@ public class NoticeController {
                 imageBinary = new Binary(BsonBinarySubType.BINARY, file.getBytes());
             }
 
-            // ✅ Save in MongoDB
+            // Save in MongoDB
             NoticeData notice = new NoticeData(name, date, time, description, imageBinary);
             notice = noticeRepository.insert(notice);
             return ResponseEntity.ok("Notice saved with ID: " + notice.getId());
@@ -59,7 +59,7 @@ public class NoticeController {
         }
     }
 
-    // ✅ Retrieve All Notices (GET)
+    // Retrieve All Notices (GET)
     @GetMapping
     public ResponseEntity<List<Map<String, Object>>> getAllNotices() {
         List<NoticeData> notices = noticeRepository.findAll();
@@ -77,7 +77,7 @@ public class NoticeController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ Retrieve Notice by ID (GET)
+    // Retrieve Notice by ID (GET)
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> getNoticeById(@PathVariable String id) {
         Optional<NoticeData> noticeOptional = noticeRepository.findById(id);
@@ -96,7 +96,7 @@ public class NoticeController {
         }
     }
 
-    // ✅ Update Notice (PUT)
+    // Update Notice (PUT)
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateNotice(
             @PathVariable String id,
@@ -119,12 +119,12 @@ public class NoticeController {
             notice.setDescription(description);
 
             if (file != null && !file.isEmpty()) {
-                // ✅ Validate Image Size (Example: Limit to 5MB)
+                // Validate Image Size (Example: Limit to 5MB)
                 if (file.getSize() > 5 * 1024 * 1024) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image size exceeds 5MB");
                 }
 
-                // ✅ Validate Image Type
+                // Validate Image Type
                 String contentType = file.getContentType();
                 if (contentType == null || !contentType.startsWith("image/")) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Only image files are allowed");
@@ -141,7 +141,7 @@ public class NoticeController {
         }
     }
 
-    // ✅ Delete Notice (DELETE)
+    // Delete Notice (DELETE)
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteNotice(@PathVariable String id) {
         if (!noticeRepository.existsById(id)) {

@@ -18,28 +18,28 @@ public class ServiceController {
     @Autowired
     private ServiceRepository serviceRepository;
 
-    // ✅ Create a new service request
+    //  Create a new service request
     @PostMapping("/create")
     public ResponseEntity<String> createService(@RequestBody Servicedata serviceData) {
         serviceRepository.save(serviceData);
         return ResponseEntity.status(HttpStatus.CREATED).body("Service request created successfully");
     }
 
-    // ✅ Fetch all service requests
+    //  Fetch all service requests
     @GetMapping("/all")
     public ResponseEntity<List<Servicedata>> getAllServices() {
         List<Servicedata> services = serviceRepository.findAll();
         return ResponseEntity.ok(services);
     }
 
-    // ✅ Fetch a single service request by ID
+    //  Fetch a single service request by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getServiceById(@PathVariable String id) {
         Optional<Servicedata> service = serviceRepository.findById(id);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service request not found");
     }
 
-    // ✅ Update a service request
+    //  Update a service request
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateService(@PathVariable String id, @RequestBody Servicedata updatedService) {
         if (!serviceRepository.existsById(id)) {
@@ -50,7 +50,7 @@ public class ServiceController {
         return ResponseEntity.ok("Service request updated successfully");
     }
 
-    // ✅ Delete a service request
+    //  Delete a service request
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteService(@PathVariable String id) {
         if (!serviceRepository.existsById(id)) {

@@ -23,7 +23,7 @@ public class EventController {
     @Autowired
     private EventRepository eventRepository;
 
-    // ✅ POST Endpoint to Upload Image
+    // POST Endpoint to Upload Image
     @PostMapping("/upload")
 public ResponseEntity<String> addEvent(
         @RequestParam("name") String name,
@@ -32,18 +32,18 @@ public ResponseEntity<String> addEvent(
         @RequestParam("image") MultipartFile file) {
 
     try {
-        // ✅ Validate Image Size (Example: Limit to 5MB)
+        // Validate Image Size (Example: Limit to 5MB)
         if (file.getSize() > 5 * 1024 * 1024) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Image size exceeds 5MB");
         }
 
-        // ✅ Validate Image Type
+        // Validate Image Type
         String contentType = file.getContentType();
         if (contentType == null || !contentType.startsWith("image/")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Only image files are allowed");
         }
 
-        // ✅ Save Image in MongoDB (Binary Format)
+        // Save Image in MongoDB (Binary Format)
         Eventdata event = new Eventdata(name, date, description,
                 new Binary(BsonBinarySubType.BINARY, file.getBytes()));
 
@@ -68,7 +68,7 @@ public ResponseEntity<List<Map<String, Object>>> getAllEvents() {
         eventData.put("date", event.getDate());
         eventData.put("description", event.getDescription());
         
-        // ✅ Ensure image is always a valid string (empty if null)
+        // Ensure image is always a valid string (empty if null)
         String imageBase64 = event.getImageBase64();
         eventData.put("imageBase64", imageBase64 != null ? imageBase64 : "");  
 
@@ -81,7 +81,7 @@ public ResponseEntity<List<Map<String, Object>>> getAllEvents() {
 
 
 
-    // ✅ GET Endpoint to Retrieve Image by ID
+    // GET Endpoint to Retrieve Image by ID
     @GetMapping("/{id}")
 public ResponseEntity<Map<String, Object>> getEventById(@PathVariable String id) {
     Optional<Eventdata> eventOptional = eventRepository.findById(id);
@@ -120,7 +120,7 @@ public ResponseEntity<List<Eventdata.Feedback>> getFeedbacks(@PathVariable Strin
             .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 }
 
-// ✅ Delete Notice (DELETE)
+// Delete Notice (DELETE)
 @DeleteMapping("/delete/{id}")
 public ResponseEntity<String> deleteNotice(@PathVariable String id) {
     if (!eventRepository.existsById(id)) {
