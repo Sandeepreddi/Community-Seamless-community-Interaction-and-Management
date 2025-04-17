@@ -10,8 +10,8 @@
   
   .signup_img img {
     width: 420px;
-    height: 450px;
-    border-radius: 15px;
+    height: 500px;
+    border-radius: 5px;
     object-fit: cover;
   }
   
@@ -27,22 +27,22 @@
   
   .signup_form img {
     margin: 0px auto 0px;
-    width: 250px;
-    height: 50px;
+    width: 210px;
+    height: 38px;
     object-fit: contain;
   }
 
   
   .signup_form h3 {
     margin: 10px 0;
-    font-size: 30px;
+    font-size: 20px;
     color: #21444c;
     align-self:center;
   }
   
-  .signup_form label {
+  .signup_form label{
     margin-bottom: 5px;
-    font-size: 20px;
+    font-size: 15px;
     align-self: flex-start;
     width: 100%;
     text-align: left;
@@ -52,18 +52,18 @@
   .signup_form input {
     margin-bottom: 15px;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
     width: 89%;
     border: 1px solid #ddd;
   }
   
   .signup_form button {
-    padding: 12px 25px;
+    padding: 10px 25px;
     color: white;
     background-color: #21444c;
     border-radius: 5px;
     border: none;
-    width: 100%;
+    width: 94%;
     font-size: 16px;
     margin-top: 10px;
     cursor: pointer;
@@ -82,8 +82,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    gap: 10px;
   }
   
   .column a {

@@ -20,32 +20,27 @@ function DisplayNotice() {
   };
 
   return (
-    <div className="notice-container">
-      <h2 className="notice-header">Resident Notices</h2>
-      
-      <div className="notice-grid">
+    <div className="resident-notice-container">
+      <h3 >Notices</h3>
+      <div className=" resident-notices-grid">
         {notices.length > 0 ? (
           notices.map((notice) => (
-            <div key={notice.id} className="notice-card">
+            <div key={notice.id} className="resident-notice-card">
               {notice.imageBase64 && (
                 <img 
                   src={`data:image/png;base64,${notice.imageBase64}`} 
                   alt="Notice" 
-                  className="notice-image" 
+                  className="notice-img" 
                 />
               )}
-              <div className="notice-content">
-                <h3 className="notice-title">{notice.name}</h3>
-                <div className="notice-meta">
-                  <span className="notice-date">{notice.date}</span>
-                  <span className="notice-time">{notice.time}</span>
-                </div>
-                <p className="notice-description">{notice.description}</p>
-              </div>
+              <h4>{notice.name}</h4>
+              <p><strong>Date:</strong> {notice.date}</p>
+              <p><strong>Time:</strong> {notice.time}</p>
+              <p>{notice.description}</p>
             </div>
           ))
         ) : (
-          <p className="no-notices">No notices available at the moment.</p>
+          <p>No notices available.</p>
         )}
       </div>
     </div>

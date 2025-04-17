@@ -1,8 +1,39 @@
-.body {
-    text-align: center;
-    padding: 20px;
+.admin-notice-body {
+  align-items: center;
+  color: #333;
   }
   
+  .admin-notice-body h4 {
+    margin: 0;
+    padding: 0;
+    
+  font-size: 22px;
+  }
+  .admin-notices-list {
+    text-align: center;
+  }
+
+  .admin-notices-grid {
+    display: grid;
+    column-gap: 50px;
+    margin-top: 0px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .notices-list h3{
+      color: #333;
+      font-size: 22px;
+  }
+  
+
+  .admin-notices-body-h4 {
+    align-items: center;
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 10px;
+    padding: 10px;
+    
+  }
   .create-button {
     background-color: #007bff;
     color: white;
@@ -60,7 +91,7 @@
     border-radius: 5px;
   }
   
-  .submit-button {
+  .admin-notice-submit-button {
     background-color: #28a745;
     color: white;
     padding: 10px;
@@ -71,11 +102,11 @@
     width: 100%;
   }
   
-  .submit-button:hover {
+  .admin-notice-submit-button:hover {
     background-color: #218838;
   }
   
-  .cancel-button {
+  .admin-notice-cancel-button {
     background-color: #dc3545;
     color: white;
     padding: 10px;
@@ -151,17 +182,24 @@
     margin: 10px 0;
   }
   
-  .notice-list {
-    margin-top: 20px;
-  }
+
   
   .notice-card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
-    margin: 10px auto;
-    max-width: 400px;
+    width: 100%;
     text-align: left;
+  }
+
+  .notice-card h4{
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .notice-card p{
+    margin: 5px 0 0;
+    font-size: 14px;
   }
   
   .notice-img {

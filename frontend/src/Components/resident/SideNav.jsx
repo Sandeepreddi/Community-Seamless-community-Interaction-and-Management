@@ -16,76 +16,71 @@ import {
 function SideNav() {
   const navigate = useNavigate();
 
+  const navTextStyle = { display: 'flex', alignItems: 'center', gap: '8px', margin: '10px 5px' };
+  const iconStyle = { fontSize: '18px' };
+
   return (
     <div className='Nav_section'>
-      <NavLink
-        to="/resident/home"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaHome className="icon" />
-        <h2>Dashboard</h2>
+
+      <NavLink to="/resident/home" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaHome style={iconStyle} /> Dashboard
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/services"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaTools className="icon" />
-        <h2>Request Services</h2>
+
+      <NavLink to="/resident/services" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaTools style={iconStyle} /> Request Services
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/complaints"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaExclamationCircle className="icon" />
-        <h2>Complaints</h2>
+
+      <NavLink to="/resident/complaints" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaExclamationCircle style={iconStyle} /> Complaints
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/events"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaCalendarAlt className="icon" />
-        <h2>Events</h2>
+
+      <NavLink to="/resident/events" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaCalendarAlt style={iconStyle} /> Events
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/notices"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaBell className="icon" />
-        <h2>Notices</h2>
+
+      <NavLink to="/resident/notices" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaBell style={iconStyle} /> Notices
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/posts"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaNewspaper className="icon" />
-        <h2>Posts</h2>
+
+      <NavLink to="/resident/posts" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaNewspaper style={iconStyle} /> Posts
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/parking"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaCar className="icon" />
-        <h2>Parking</h2>
+
+      <NavLink to="/resident/parking" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaCar style={iconStyle} /> Parking
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/emergency"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaPhoneAlt className="icon" />
-        <h2>Emergency Contacts</h2>
+
+      <NavLink to="/resident/emergency" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaPhoneAlt style={iconStyle} /> Emergency Contacts
+        </h3>
       </NavLink>
-      <NavLink
-        to="/resident/billing"
-        className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}
-      >
-        <FaMoneyBillAlt className="icon" />
-        <h2>Billings</h2>
+
+      <NavLink to="/resident/billing" className={({ isActive }) => (isActive ? 'Nav_text active' : 'Nav_text')}>
+        <h3 style={navTextStyle}>
+          <FaMoneyBillAlt style={iconStyle} /> Billings
+        </h3>
       </NavLink>
 
       {/* Logout Button */}
       <button className="button" onClick={() => navigate('/login')}>
         Logout
       </button>
+
     </div>
   );
 }

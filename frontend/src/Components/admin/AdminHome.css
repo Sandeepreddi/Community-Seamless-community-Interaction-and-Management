@@ -2,7 +2,7 @@
 .header_img img {
     width: 170px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .column1 {
@@ -14,6 +14,7 @@
 
 .column1 h3 {
     color: #21444c;
+    font-size: 18px; 
 }
 
 .column1 div {
@@ -21,6 +22,7 @@
 }
 
 /* Navigation */
+
 
 
 .Nav_text{
@@ -33,11 +35,20 @@
     text-decoration: none; /* Remove underline */
   }
 
-.Nav_section h2:hover {
+  .Nav_section {
+    width: 20%; /* Set width to 30% of the screen */
+    gap: 70px;
+    color: #21444c; /* Text color */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Nav_section h3:hover {
     background-color: #21444c; /* Text color becomes background */
     color: white; /* Text color becomes white */
     border-radius: 5px;
     padding: 8px;
+    align-items: center;
 }
 
 .admin-container {
@@ -178,6 +189,7 @@
   .profile-icon:hover {
     color: #007bff; /* Change color on hover */
   }
+  
 
   .profile-card {
     position: absolute;
@@ -295,16 +307,17 @@
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     gap: 20px;
-    padding: 20px 20px;
+    padding: ;
 }
 
   
   .card {
-    width: 175px;
-    height: 150px;
+    width: 155px;
+    height: 134px;
     border-radius: 10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    align-content: center;
     font-family: Arial, sans-serif;
   }
   
@@ -323,6 +336,13 @@
     font-size: 1.5rem;
     display: inline-block;
   }
+
+  .nav-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* spacing between icon and text */
+  }
+
   
   /* Color themes */
   .green { background-color: #c8f7c5; color: #2e7d32; }  /* Blocks */

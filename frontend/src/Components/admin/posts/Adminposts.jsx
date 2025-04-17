@@ -3,6 +3,7 @@ import Header from './../Header'
 import SideNav from './../SideNav'
 import Body from './Body'
 import './../AdminHome.css'
+import DisplayPosts from './DisplayPosts'
 
 function Adminposts() {
   return (

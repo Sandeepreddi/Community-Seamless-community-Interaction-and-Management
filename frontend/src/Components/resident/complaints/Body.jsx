@@ -35,9 +35,9 @@ function Body() {
   };
 
   return (
-    <div className="body">
-      <h2>Resident Complaints</h2>
-      <button className="create-button" onClick={() => setShowModal(true)}>
+    <div className="resident-complaints-body">
+      <h3>Resident Complaints</h3>
+      <button className="resident-complaint-create-button" onClick={() => setShowModal(true)}>
         Create Complaint
       </button>
 
@@ -52,8 +52,11 @@ function Body() {
             <label>Description:</label>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
 
-            <button className="submit-button" onClick={handleSubmit}>Submit</button>
-            <button className="cancel-button" onClick={() => setShowModal(false)}>Cancel</button>
+            <div className="button-group">
+              <button className="req-submit-button" onClick={handleSubmit}>Submit</button>
+              <button className="req-cancel-button" onClick={() => setShowModal(false)}>Cancel</button>
+            </div>
+
           </div>
         </div>
       )}

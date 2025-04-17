@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./AdminNotice.css";
 
+import DisplayNotice from './DisplayNotice'
+
 function Body() {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
@@ -52,11 +54,13 @@ function Body() {
   };
 
   return (
-    <div className="body">
-      <h2>Admin Notice</h2>
-      <button className="create-button" onClick={() => setShowModal(true)}>
+    <div className="admin-notice-body">
+      <h4>Admin Notice</h4>
+      <button className="add-event-btn" onClick={() => setShowModal(true)}>
         Create Notice
       </button>
+      
+      <DisplayNotice />
 
       {showModal && (
         <div className="modal">
@@ -79,10 +83,10 @@ function Body() {
             <input type="file" accept="image/*" onChange={handleImageUpload} />
             {preview && <img src={preview} alt="Preview" className="preview-img" />}
 
-            <button className="submit-button" onClick={handleSubmit}>
+            <button className="admin-notice-submit-button" onClick={handleSubmit}>
               Submit
             </button>
-            <button className="cancel-button" onClick={() => setShowModal(false)}>
+            <button className="admin-notice-cancel-button" onClick={() => setShowModal(false)}>
               Cancel
             </button>
           </div>

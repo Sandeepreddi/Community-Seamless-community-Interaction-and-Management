@@ -1,10 +1,18 @@
 /* General Container */
-.events-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
+
+.resident-events-container h3{
+    color: #333;
+    font-size: 22px;
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+.events-title{
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
   
   /* Loading & Error States */
   .loading, .error {
@@ -39,16 +47,16 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .event-name {
+  .resident-event-name {
     margin: 0;
     color: #333;
-    font-size: 18px;
+    font-size: 12px;
   }
   
-  .event-date {
+  .resident-event-date {
     margin: 5px 0 0;
     color: #666;
-    font-size: 14px;
+    font-size: 12px;
   }
   
   /* Event Card (Popup) Styling */
@@ -123,3 +131,73 @@
   .event-card-close:hover {
     background: #555;
   }
+
+  .resident-feedback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .toggle-feedback-btn {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-feedback-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .resident-feedback-form {
+    width: 90%;
+    max-width: 500px;
+    background-color: #f9f9f9;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .resident-feedback-form h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .resident-feedback-form input,
+  .resident-feedback-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: none;
+  }
+  
+  .resident-feedback-form textarea {
+    min-height: 100px;
+  }
+  
+  .resident-feedback-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .resident-feedback-form button:hover {
+    background-color: #1976d2;
+  }
+  

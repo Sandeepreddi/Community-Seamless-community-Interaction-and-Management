@@ -1,80 +1,47 @@
-.notice-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
+.resident-notice-container {
+  align-items: center;
+  color: #333;
   }
   
-  .notice-header {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    font-size: 2rem;
-  }
-  
-  .notice-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-  }
-  
-  .notice-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  
-  .notice-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .notice-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .notice-content {
-    padding: 20px;
-  }
-  
-  .notice-title {
-    color: #3498db;
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
-  .notice-meta {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-  }
-  
-  .notice-description {
-    color: #34495e;
-    line-height: 1.5;
+  .resident-notice-container h3 {
     margin: 0;
+    padding: 0;
+  font-size: 22px;
+  padding-bottom: 10px;
   }
-  
-  .no-notices {
+  .resident-notices-list {
     text-align: center;
-    grid-column: 1 / -1;
-    color: #7f8c8d;
-    font-style: italic;
+  }
+
+  .resident-notices-grid {
+    display: grid;
+    column-gap: 50px;
+    margin-top: 0px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .resident-notice-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .resident-notice-card h4{
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .resident-notice-card p{
+    margin: 5px 0 0;
+    font-size: 14px;
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .notice-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .notice-header {
-      font-size: 1.5rem;
-    }
+  .resident-notice-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
   }
+  

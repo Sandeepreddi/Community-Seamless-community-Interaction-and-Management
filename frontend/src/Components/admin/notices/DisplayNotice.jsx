@@ -107,9 +107,9 @@ function DisplayNotice() {
   };
 
   return (
-    <div className="body">
-      <h2>Notices</h2>
-      <div className="notice-list">
+    <div >
+      <h3 className="admin-notices-body-h4">Notices</h3>
+      <div className=" admin-notices-grid">
         {notices.length > 0 ? (
           notices.map((notice) => (
             <div key={notice.id} className="notice-card">

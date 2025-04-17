@@ -120,6 +120,17 @@ public ResponseEntity<List<Eventdata.Feedback>> getFeedbacks(@PathVariable Strin
             .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 }
 
+// ✅ Delete Notice (DELETE)
+@DeleteMapping("/delete/{id}")
+public ResponseEntity<String> deleteNotice(@PathVariable String id) {
+    if (!eventRepository.existsById(id)) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notice not found");
+    }
+
+    eventRepository.deleteById(id);
+    return ResponseEntity.ok("Notice deleted successfully");
+}
+
 
 
 }

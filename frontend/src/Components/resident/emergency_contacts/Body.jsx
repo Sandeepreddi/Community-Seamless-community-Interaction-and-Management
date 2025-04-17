@@ -24,22 +24,22 @@ function Body() {
   };
 
   return (
-    <div className="body-container">
+    <div className="resident-emergency-body-container">
       <h2 className="title">Resident Emergency Contacts</h2>
 
-      {error && <p className="error-message">{error}</p>}
+      {error && <p className="resident-emergency-error-message">{error}</p>}
 
       {contacts.length > 0 ? (
-        <ul className="contact-list">
+        <ul className="resident-emergency-contact-list">
           {contacts.map((contact, index) => (
-            <li key={index} className="contact-item">
-              <span className="contact-name">{contact.name}</span>
-              <span className="contact-phone">{contact.phoneNumber}</span>
+            <li key={index} className="resident-emergency-contact-item">
+              <span className="resident-emergency-contact-name">{contact.name}</span>
+              <span className="resident-emergency-contact-phone">{contact.phoneNumber}</span>
             </li>
           ))}
         </ul>
       ) : (
-        <p className="no-contacts">No emergency contacts available</p>
+        <p className="resident-emergency-no-contacts">No emergency contacts available</p>
       )}
     </div>
   );

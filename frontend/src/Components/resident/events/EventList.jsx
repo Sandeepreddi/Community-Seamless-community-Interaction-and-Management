@@ -5,7 +5,7 @@ const EventsList = () => {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
-  const [feedback, setFeedback] = useState({ username: "", comment: "" });
+  const [feedback, setFeedback] = useState({ user: "", comment: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,13 +28,13 @@ const EventsList = () => {
   }, []);
 
   const handleFeedbackSubmit = async () => {
-    if (!feedback.username || !feedback.comment) {
+    if (!feedback.user || !feedback.comment) {
       alert("Please enter your name and comment.");
       return;
     }
 
     const feedbackData = {
-      username: feedback.username,
+      user: feedback.user,
       comment: feedback.comment,
     };
 
@@ -54,7 +54,7 @@ const EventsList = () => {
 
       alert("Feedback submitted successfully!");
       setShowFeedbackForm(false);
-      setFeedback({ username: "", comment: "" });
+      setFeedback({ user: "", comment: "" });
     } catch (error) {
       alert("Error submitting feedback: " + error.message);
     }
@@ -64,8 +64,9 @@ const EventsList = () => {
   if (error) return <div className="error">Error: {error}</div>;
 
   return (
-    <div className="events-container">
-      <h2 className="events-title">Event List</h2>
+    <div className="resident-events-container">
+      <h3>Event List</h3>
+      {events.length > 0 ? (
       <div className="events-grid">
         {events.map((event) => (
           <div
@@ -74,13 +75,16 @@ const EventsList = () => {
             onClick={() => {
               setSelectedEvent(event);
               setShowFeedbackForm(false);
-            }}
-          >
-            <h3 className="event-name">{event.name}</h3>
-            <p className="event-date">{event.date}</p>
+            }}>
+
+            <h4  style={{ fontSize: '16px' }} className="resident-event-name" >{event.name}</h4>
+            <p className="resident-event-date">{event.date}</p>
           </div>
         ))}
       </div>
+      ) : (
+        <p className="no-notices">No Events Yet</p>
+      )}
 
       {selectedEvent && (
         <div className="event-card">
@@ -121,14 +125,14 @@ const EventsList = () => {
             </div>
 
             {showFeedbackForm && (
-              <div className="feedback-form">
+              <div className="resident-feedback-form">
                 <h3>Submit Feedback</h3>
                 <input
                   type="text"
                   placeholder="Your Name"
-                  value={feedback.username}
+                  value={feedback.user}
                   onChange={(e) =>
-                    setFeedback({ ...feedback, username: e.target.value })
+                    setFeedback({ ...feedback, user: e.target.value })
                   }
                 />
                 <textarea

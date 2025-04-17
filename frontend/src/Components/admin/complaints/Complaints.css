@@ -1,3 +1,12 @@
+.complaints-list {
+  text-align: center;
+}
+.complaints-list h3{
+    color: #333;
+    font-size: 22px;
+}
+
+
 .body {
     padding: 20px;
     text-align: center;
@@ -64,9 +73,6 @@
   }
   
   /* Complaint List Styling */
-  .complaints-list {
-    margin-top: 20px;
-  }
   
   .complaint-card {
     background: #f8f9fa;

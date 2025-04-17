@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './../AdminHome.css';
+import './EventsLists.css';
 import EventsList from './EventList';
 
 function Body() {
@@ -82,9 +82,9 @@ function Body() {
   };
 
   return (
-    <div className="body">
-      <div className="header-section">
-        <h2>Admin Events</h2>
+    <div >
+      <div className="admin-events-body">
+        <h4>Admin Events</h4>
         <button 
           className="add-event-btn"
           onClick={() => setIsModalOpen(true)}
@@ -98,16 +98,9 @@ function Body() {
       {/* Add Event Modal */}
       {isModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
+          <div className="admin-modal-content">
+            <div className="admin-modal-header">
               <h3>Add New Event</h3>
-              <button 
-                className="close-btn"
-                onClick={() => !isSubmitting && setIsModalOpen(false)}
-                disabled={isSubmitting}
-              >
-                &times;
-              </button>
             </div>
             
             <form onSubmit={handleSubmit}>

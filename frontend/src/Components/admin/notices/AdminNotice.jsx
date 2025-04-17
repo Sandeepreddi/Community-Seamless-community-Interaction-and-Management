@@ -3,7 +3,6 @@ import Header from './../Header'
 import SideNav from './../SideNav'
 import Body from './Body'
 import './../AdminHome.css'
-import DisplayNotice from './DisplayNotice'
 
 function AdminNotice() {
   return (
@@ -12,7 +11,6 @@ function AdminNotice() {
         <div className="admin-container">
             <SideNav />
             <Body />
-            <DisplayNotice />
         </div>
     </div>
   )

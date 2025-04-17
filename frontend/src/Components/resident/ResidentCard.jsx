@@ -30,7 +30,7 @@ function ResidentCard({
         
         {expanded && (
           <div className="additional-details">
-            <h4>Society Details</h4>
+            <h3>Society Details</h3>
             <p>
               Society: {societyName}
             </p>

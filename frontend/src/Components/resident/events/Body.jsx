@@ -3,7 +3,7 @@ import EventsList from './EventList';
 
 function Body() {
   return (
-    <div className="body">
+    <div >
       <div>
         <EventsList></EventsList>
       </div>

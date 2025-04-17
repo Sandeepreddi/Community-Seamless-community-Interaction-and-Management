@@ -86,8 +86,8 @@ const Login = () => {
         <button onClick={handleLogin}>Login</button>
 
         <div className='column'>
-          <h4>Don&apos;t Have an Account</h4>
-          <Link to="/">Signup</Link>
+          <h5>Don&apos;t Have an Account</h5>
+          <Link to="/" style={{ fontSize: "15px" }}>Signup</Link>
         </div>
       </div>
     </div>

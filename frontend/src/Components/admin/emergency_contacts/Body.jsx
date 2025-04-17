@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { FaTrash } from "react-icons/fa";
 import "./AdminEmergency.css"; // Import external CSS
+
 
 function Body() {
   const [contacts, setContacts] = useState([]);
@@ -111,9 +113,8 @@ function Body() {
           contacts.map((contact) => (
             <li key={contact.id} className="contact-item">
               <strong>{contact.name}</strong> - {contact.phoneNumber}
-              <button className="delete-button" onClick={() => deleteContact(contact.id)}>
-                ❌
-              </button>
+              <FaTrash className="delete-button" onClick={() => deleteContact(contact.id)}/>
+              
             </li>
           ))
         ) : (

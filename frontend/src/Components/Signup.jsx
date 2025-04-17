@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../Components/Signup.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { size } from "mathjs";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -153,8 +154,8 @@ const Signup = () => {
         <button onClick={handleSignup}>Signup</button>
 
         <div className="column">
-          <h4>Existing User</h4>
-          <Link to="/login">Login</Link>
+          <h5>Existing User</h5>
+          <Link to="/login" style={{ fontSize: "15px" }}>Login</Link>
         </div>
       </div>
     </div>
